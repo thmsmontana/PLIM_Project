@@ -41,12 +41,33 @@
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MON APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="nom de la page" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="GeoSong" Margin="9,-7,0,0" HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <!-- <ListBox x:Name="listeDesLieux" SelectionChanged="listeDesLieus_SelectionChanged">
+                 <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Lieu}" />
+                            <Button x:Name="button_add_point" Content="Ajouter dans la zone" />
+                            <Button x:Name="button_delete_point" Content="En dehors de la zone" />
+                            <Button x:Name="button_delete" Content="x" FontSize="36" Width="60" Height="70" MinWidth="50" MinHeight="50" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate> 
+            </ListBox> -->
+                <Button x:Name="button_add" Content="+" Click="Button_Add" FontSize="36" HorizontalAlignment="Left" />
+                <TextBox x:Name="nom_new" Visibility="Collapsed" />
+                <Button x:Name="button_new" Visibility="Collapsed" Content="Valider" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
+
+                <Button Click="Button_Click_1"  Content="Obtenir la position du téléphone"/>
+                <TextBlock x:Name="Latitude"/>
+                <TextBlock x:Name="Longitude"/>
+                <TextBlock x:Name="Statut"/>
+            </StackPanel>
 
         </Grid>
 

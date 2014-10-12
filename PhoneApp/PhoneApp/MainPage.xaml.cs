@@ -8,11 +8,13 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneApp.Resources;
+using Windows.Devices.Geolocation;
 
 namespace PhoneApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private Geolocator geolocator;
         // Constructeur
         public MainPage()
         {
@@ -37,5 +39,95 @@ namespace PhoneApp
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
+
+        private void Button_Add(object sender, RoutedEventArgs e)
+        {
+            nom_new.Visibility = Visibility.Visible;
+            button_new.Visibility = Visibility.Visible;
+        }
+        private void Button_New(object sender, RoutedEventArgs e)
+        {
+            String nom = nom_new.Text;
+            nom_new.Text = "";
+            nom_new.Visibility = Visibility.Collapsed;
+            button_new.Visibility = Visibility.Collapsed;
+        }
+        /*
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            geolocator = new Geolocator { DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 20 };
+            geolocator.StatusChanged += geolocator_StatusChanged;
+            geolocator.PositionChanged += geolocator_PositionChanged;
+
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            geolocator.PositionChanged -= geolocator_PositionChanged;
+            geolocator.StatusChanged -= geolocator_StatusChanged;
+            geolocator = null;
+
+            base.OnNavigatedFrom(e);
+        }
+
+        private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
+        {
+            string status = "";
+
+            switch (args.Status)
+            {
+                case PositionStatus.Disabled:
+                    status = "Le service de localisation est désactivé dans les paramètres";
+                    break;
+                case PositionStatus.Initializing:
+                    status = "En cours d'initialisation";
+                    break;
+                case PositionStatus.Ready:
+                    status = "Service de localisation prêt";
+                    break;
+                case PositionStatus.NotAvailable:
+                case PositionStatus.NotInitialized:
+                case PositionStatus.NoData:
+                    break;
+            }
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                Statut.Text = status;
+            });
+        }
+
+        private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                Latitude.Text = args.Position.Coordinate.Latitude.ToString();
+                Longitude.Text = args.Position.Coordinate.Longitude.ToString();
+            });
+        } */
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Geolocator geolocator = new Geolocator();
+            geolocator.DesiredAccuracyInMeters = 50;
+
+            try
+            {
+                Geoposition geoposition = await geolocator.GetGeopositionAsync(TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(10));
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    Latitude.Text = geoposition.Coordinate.Latitude.ToString();
+                    Longitude.Text = geoposition.Coordinate.Longitude.ToString();
+                });
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show("Le service de location est désactivé dans les paramètres du téléphone");
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }
