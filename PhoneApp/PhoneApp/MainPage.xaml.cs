@@ -9,16 +9,27 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneApp.Resources;
 using Windows.Devices.Geolocation;
+using Microsoft.Phone.Tasks;
 
 namespace PhoneApp
 {
+
     public partial class MainPage : PhoneApplicationPage
     {
+        public List<ElementAFaireBinding> Lieu;
+
         private Geolocator geolocator;
         // Constructeur
         public MainPage()
         {
             InitializeComponent();
+            //Lieu.Add("Default");
+            Lieu = new List<ElementAFaireBinding>{
+                new ElementAFaireBinding {Titre = "Default", Statut = "sonnerie"},
+                new ElementAFaireBinding {Titre = "Deuxième", Statut = "silencieux"},
+                new ElementAFaireBinding {Titre = "Troisième", Statut = "vibreur"},
+            };
+            listeDesLieux.ItemsSource = Lieu;
 
             // Exemple de code pour la localisation d'ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -47,12 +58,18 @@ namespace PhoneApp
         }
         private void Button_New(object sender, RoutedEventArgs e)
         {
-            String nom = nom_new.Text;
+            //SaveRingtoneTask ringtoneTask = new SaveRingtoneTask();
+
+            ElementAFaireBinding element = new ElementAFaireBinding { Titre = nom_new.Text, Statut = "vibreur" };
+            //String nom = nom_new.Text;
+            Lieu.Add(element);
+            listeDesLieux.ItemsSource = Lieu;
+
             nom_new.Text = "";
             nom_new.Visibility = Visibility.Collapsed;
             button_new.Visibility = Visibility.Collapsed;
         }
-        /*
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             geolocator = new Geolocator { DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 20 };
@@ -105,9 +122,10 @@ namespace PhoneApp
                 Latitude.Text = args.Position.Coordinate.Latitude.ToString();
                 Longitude.Text = args.Position.Coordinate.Longitude.ToString();
             });
-        } */
+        } 
+       
         private async void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        { /*
             Geolocator geolocator = new Geolocator();
             geolocator.DesiredAccuracyInMeters = 50;
 
@@ -127,7 +145,7 @@ namespace PhoneApp
             }
             catch (Exception ex)
             {
-            }
-        }
+            }*/
+        } 
     }
 }
