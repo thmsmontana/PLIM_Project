@@ -33,7 +33,7 @@ namespace PhoneApp
                 new ElementAFaireBinding {Titre = "Deuxième", Url = "http://google.fr"},
                 new ElementAFaireBinding {Titre = "Troisième", Url = "http://google.fr"},*/
             };
-            //listeDesLieux.ItemsSource = Lieu; -------------------------
+            listeDesLieux.ItemsSource = Lieu; 
 
             // Exemple de code pour la localisation d'ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -67,7 +67,7 @@ namespace PhoneApp
             ElementAFaireBinding element = new ElementAFaireBinding { Titre = nom_new.Text, Url = "vibreur" };
             //String nom = nom_new.Text;
             Lieu.Add(element);
-            //listeDesLieux.ItemsSource = Lieu; -----------------------------------------
+            listeDesLieux.ItemsSource = Lieu; 
 
             nom_new.Text = "";
             nom_new.Visibility = Visibility.Collapsed;
@@ -155,12 +155,12 @@ namespace PhoneApp
         private void button_url_Click(object sender, RoutedEventArgs e)
         {
 
-            /*string selection = string.Empty;
+            string selection = string.Empty;
             foreach (string choix in listeDesLieux.SelectedItems)
             {
                 selection += choix + ";";
             }
-            Selection.Text = selection;*/
+            Selection.Text = selection;
             //ElementAFaireBinding element = (string)listeDesLieux.SelectedItem;
 
                 //WebBrowserTask webBrowserTask = new WebBrowserTask();
@@ -174,6 +174,11 @@ namespace PhoneApp
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
 
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         /*

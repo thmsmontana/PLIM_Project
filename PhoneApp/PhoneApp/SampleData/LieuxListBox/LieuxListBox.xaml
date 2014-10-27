@@ -1,0 +1,11 @@
+﻿<!--
+      *********    NE PAS MODIFIER CE FICHIER     *********
+      Ce fichier est régénéré par un outil de création.Modifier
+ .     ce fichier peut provoquer des erreurs.
+-->
+<SampleData:LieuxListBox xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.LieuxListBox" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <SampleData:LieuxListBox.Collection>
+    <SampleData:Item Lieu="Polytech" Url="http://edt.polytech.unice.fr" />
+    <SampleData:Item Lieu="Maison" Url="http//google.fr" />
+  </SampleData:LieuxListBox.Collection>
+</SampleData:LieuxListBox>

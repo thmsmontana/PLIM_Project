@@ -108,6 +108,9 @@
     <Compile Include="SampleData\DesignListBox\DesignListBox.xaml.cs">
       <DependentUpon>DesignListBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\LieuxListBox\LieuxListBox.xaml.cs">
+      <DependentUpon>LieuxListBox.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -119,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SampleData\DesignListBox\DesignListBox.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SampleData\LieuxListBox\LieuxListBox.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -161,6 +168,14 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\DesignListBoxSampleData.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </DesignData>
+  </ItemGroup>
+  <ItemGroup>
+    <DesignTimeOnly Include="SampleData\LieuxListBox\LieuxListBox.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
