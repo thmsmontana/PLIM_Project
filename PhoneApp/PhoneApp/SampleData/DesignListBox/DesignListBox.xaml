@@ -1,0 +1,10 @@
+﻿<!--
+      *********    NE PAS MODIFIER CE FICHIER     *********
+      Ce fichier est régénéré par un outil de création.Modifier
+ .     ce fichier peut provoquer des erreurs.
+-->
+<SampleData:DesignListBox xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.DesignListBox" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <SampleData:DesignListBox.Collection>
+    <SampleData:Item Lieu="Polytech" Url="http://sco.polytech.unice.fr/1/invite?login=true" />
+  </SampleData:DesignListBox.Collection>
+</SampleData:DesignListBox>

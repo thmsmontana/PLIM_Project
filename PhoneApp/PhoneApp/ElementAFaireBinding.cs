@@ -9,7 +9,7 @@ namespace PhoneApp
     public class ElementAFaireBinding
     {
         public String Titre { get; set; }
-        public String Statut { get; set; }
+        public String Url { get; set; }
 
     }
 }

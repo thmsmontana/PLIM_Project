@@ -5,6 +5,9 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.ComponentModel;
+using System.Data;
+using System.Text;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PhoneApp.Resources;
@@ -25,11 +28,12 @@ namespace PhoneApp
             InitializeComponent();
             //Lieu.Add("Default");
             Lieu = new List<ElementAFaireBinding>{
-                new ElementAFaireBinding {Titre = "Default", Statut = "sonnerie"},
-                new ElementAFaireBinding {Titre = "Deuxième", Statut = "silencieux"},
-                new ElementAFaireBinding {Titre = "Troisième", Statut = "vibreur"},
+                new ElementAFaireBinding {Titre = "Default", Url = "http://google.com"},
+                /*
+                new ElementAFaireBinding {Titre = "Deuxième", Url = "http://google.fr"},
+                new ElementAFaireBinding {Titre = "Troisième", Url = "http://google.fr"},*/
             };
-            listeDesLieux.ItemsSource = Lieu;
+            //listeDesLieux.ItemsSource = Lieu; -------------------------
 
             // Exemple de code pour la localisation d'ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -60,10 +64,10 @@ namespace PhoneApp
         {
             //SaveRingtoneTask ringtoneTask = new SaveRingtoneTask();
 
-            ElementAFaireBinding element = new ElementAFaireBinding { Titre = nom_new.Text, Statut = "vibreur" };
+            ElementAFaireBinding element = new ElementAFaireBinding { Titre = nom_new.Text, Url = "vibreur" };
             //String nom = nom_new.Text;
             Lieu.Add(element);
-            listeDesLieux.ItemsSource = Lieu;
+            //listeDesLieux.ItemsSource = Lieu; -----------------------------------------
 
             nom_new.Text = "";
             nom_new.Visibility = Visibility.Collapsed;
@@ -146,6 +150,42 @@ namespace PhoneApp
             catch (Exception ex)
             {
             }*/
-        } 
+        }
+
+        private void button_url_Click(object sender, RoutedEventArgs e)
+        {
+
+            /*string selection = string.Empty;
+            foreach (string choix in listeDesLieux.SelectedItems)
+            {
+                selection += choix + ";";
+            }
+            Selection.Text = selection;*/
+            //ElementAFaireBinding element = (string)listeDesLieux.SelectedItem;
+
+                //WebBrowserTask webBrowserTask = new WebBrowserTask();
+                //webBrowserTask.Uri = new Uri("", UriKind.Absolute);
+                //webBrowserTask.Show();
+
+        }
+
+        private void button_modifier_Click(object sender, RoutedEventArgs e)
+        {
+            //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
+
+            //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
+        }
+
+        /*
+         * private void button8_Click(object sender, System.EventArgs e)
+
+{
+
+string url = "http://www.google.com";
+
+System.Diagnostics.Process.Start(url);
+
+}
+    */
     }
 }

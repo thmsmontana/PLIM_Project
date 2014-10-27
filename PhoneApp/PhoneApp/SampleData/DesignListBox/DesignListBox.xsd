@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+      *********    NE PAS MODIFIER CE FICHIER     *********
+      Ce fichier est régénéré par un outil de création.Modifier
+ .     ce fichier peut provoquer des erreurs.
+-->
+<xs:schema xmlns:blend="http://schemas.microsoft.com/expression/blend/2008" xmlns:tns="Expression.Blend.SampleData.DesignListBox" targetNamespace="Expression.Blend.SampleData.DesignListBox" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DesignListBox" type="tns:DesignListBox" />
+  <xs:complexType name="DesignListBox">
+    <xs:sequence>
+      <xs:element name="Collection" type="tns:ItemCollection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemCollection">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Item" type="tns:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Item">
+    <xs:attribute name="Lieu" type="xs:string" />
+    <xs:attribute blend:Format="Lorem ipsum" blend:FormatParameters="4,8" name="Url" type="xs:string" />
+  </xs:complexType>
+</xs:schema>
