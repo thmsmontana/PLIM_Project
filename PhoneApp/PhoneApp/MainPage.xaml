@@ -10,207 +10,71 @@
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+        <phone:PhoneApplicationPage.Resources>
+            <SampleData:LieuxListBox x:Key="LieuxListBox" d:IsDataSource="True"/>
+            <DataTemplate x:Key="ItemTemplate">
+                <StackPanel>
+                    <TextBlock Text="{Binding Lieu}"/>
+                    <TextBlock Text="{Binding Url}"/>
+                </StackPanel>
+            </DataTemplate>
+        </phone:PhoneApplicationPage.Resources>
+        <phone:PhoneApplicationPage.FontFamily>
+            <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+        </phone:PhoneApplicationPage.FontFamily>
+        <phone:PhoneApplicationPage.FontSize>
+            <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+        </phone:PhoneApplicationPage.FontSize>
+        <phone:PhoneApplicationPage.Foreground>
+            <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
+    <ScrollViewer>
+        <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+        <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Source={StaticResource LieuxListBox}}">
 
-	<phone:PhoneApplicationPage.Resources>
-		<SampleData:LieuxListBox x:Key="LieuxListBox" d:IsDataSource="True"/>
-		<DataTemplate x:Key="ItemTemplate">
-			<StackPanel>
-				<TextBlock Text="{Binding Lieu}"/>
-				<TextBlock Text="{Binding Url}"/>
-			</StackPanel>
-		</DataTemplate>
-	</phone:PhoneApplicationPage.Resources>
-	<phone:PhoneApplicationPage.FontFamily>
-		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
-	</phone:PhoneApplicationPage.FontFamily>
-	<phone:PhoneApplicationPage.FontSize>
-		<StaticResource ResourceKey="PhoneFontSizeNormal"/>
-	</phone:PhoneApplicationPage.FontSize>
-	<phone:PhoneApplicationPage.Foreground>
-		<StaticResource ResourceKey="PhoneForegroundBrush"/>
-	</phone:PhoneApplicationPage.Foreground>
-<!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-	<Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Source={StaticResource LieuxListBox}}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-
-		<!-- REMARQUE CONCERNANT LA LOCALISATION :
-            Pour localiser les chaînes affichées, copiez leurs valeurs dans les clés correctes
-            du fichier de ressources linguistiquement neutre de l'application (AppResources.resx), puis
-            remplacez le texte codé en dur entre les guillemets des attributs
-            par la clause de liaison dont le chemin pointe vers ce nom de chaîne.
-
-            Par exemple :
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            Cette liaison pointe vers la ressource de chaîne du modèle appelée ApplicationTitle.
-
-            L'ajout de langues prises en charge à l'onglet Propriétés du projet crée un
-            fichier resx par langue qui peut restituer les valeurs traduites de vos
-            chaînes d'interface utilisateur. La liaison dans ces exemples peut entraîner le retrait de la valeur des
-            attributs du fichier .resx qui correspond à la valeur
-            CurrentUICulture de l'application au moment de l'exécution.
-         -->
-
-		<!--
-                <ListBox x:Name="listeDesLieux" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                    <StackPanel>
-        
-                        <Grid x:Name="ContentPanel" Grid.Row="1" >
-                            <StackPanel Margin="0,0,0,561">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="63*" />
-                                        <ColumnDefinition Width="198*" />
-                                        <ColumnDefinition Width="157*"/>
-                                        <ColumnDefinition Width="62*" />
-                                    </Grid.ColumnDefinitions>
-                                    <CheckBox x:Name="EnCours" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="72" Width="68" Grid.ColumnSpan="2" />
-                                    <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" FontSize="16" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="27" Margin="0,23,0,22" Width="39" />
-                                    <Button Click="button_modifier_Click" x:Name="button_modifier" FontSize="14" Content="Modifier" Margin="10,0" Grid.Column="2" />
-                                    <Button x:Name="button_delete" Content="x" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Height="72" Width="62" />
-                                </Grid>
-                            </StackPanel>
-                        </Grid>
-                        <Grid x:Name="ContentPane2" Grid.Row="2" Margin="5,0,5,0">
-                            <StackPanel Margin="0,0,0,488">
-                                <Grid Height="86">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button Click="button_url_Click" Grid.Row="0" FontSize="14" x:Name="button_url" Content="{Binding Url}" Margin="0,68,0,-58" />
-                                </Grid>
-                            </StackPanel>
-                        </Grid>
-                        <Grid x:Name="ContentPane3" Grid.Row="1" Margin="0,10,0,0" >
-                            <StackPanel Orientation="Vertical" Margin="0,128,0,432">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Button x:Name="button_add_point" Grid.Row="0" Grid.Column="0" FontSize="14" Content="Ajouter des points" Visibility="Collapsed" />
-                                    <Button x:Name="button_delete_point" Grid.Row="0" Grid.Column="1" FontSize="14" Content="Enlever des points" Visibility="Collapsed" />
-                                </Grid>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox> -->
-
-		<!--Supprimez les commentaires pour voir une grille d'alignement qui vous aidera à vous assurer que vos contrôles sont
-            alignés sur les limites communes.  L'image a une marge supérieure de -32px pour
-            tenir compte de la barre d'état système. Attribuez-lui la valeur 0 (ou supprimez la marge)
-            si la barre d'état système est masquée.
-
-            Avant l'envoi, supprimez ce XAML et l'image proprement dite.-->
-		<!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
-    <!--TitlePanel contient le nom de l'application et le titre de la page-->
-		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock Text="GeoSong" Margin="9,-7,0,0" HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}"/>
-		</StackPanel>
-            <!--<TextBox x:Name="nom_new" Visibility="Collapsed" />
-                <Button x:Name="button_new" Visibility="Collapsed" Content="Valider" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
-                -->
-                
-		<ListBox x:Name="listeDesLieux" Margin="0,0,0,438" Grid.Row="1" >
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<StackPanel Orientation="Horizontal">
-							<CheckBox x:Name="EnCours" />
-							<TextBlock x:Name="nom_lieu" Text="{Binding Titre}" />
-						</StackPanel>
-						<StackPanel Orientation="Vertical">
-							<Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" />
-							<Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" />
-						</StackPanel>
-						<StackPanel Orientation="Vertical">
-							<Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
-							<Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
-						</StackPanel>
-						<Button x:Name="button_delete" Content="x" />
-					</StackPanel>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox> 
-		<Grid x:Name="ContentPane4" Grid.Row="4" Margin="0,256,0,279" >
-			<StackPanel Margin="0,-58,0,68" >
-				<Grid >
-					<Grid.RowDefinitions>
-						<RowDefinition Height="0*" />
-						<RowDefinition Height="0*" />
-						<RowDefinition Height="0*"/>
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<TextBlock x:Name="Selection" Grid.Row="0" Text="selection" />
-					<TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
-					<TextBlock x:Name="Longitude" Grid.Row="2" Text="longitude"  />
-				</Grid>
-			</StackPanel>
-		</Grid>
-		<Grid x:Name="ContentPane5" Grid.Row="5">
-			<StackPanel Margin="0,357,0,0">
-				<!--<TextBox x:Name="nom_new" Visibility="Collapsed" />
-                <Button x:Name="button_new" Visibility="Collapsed" Content="Valider" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
-                -->
-				<!--<TextBox x:Name="nom_new" Visibility="Collapsed" />
-                <Button x:Name="button_new" Visibility="Collapsed" Content="Valider" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
-                -->
-				<Button Click="Button_Click_1" FontSize="16" Content="Obtenir la position du téléphone"/>
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="*" />
-						<RowDefinition Height="*" />
-						<RowDefinition Height="*" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<Button x:Name="button_add" Grid.Row="0"  Content="+" Click="Button_Add" HorizontalAlignment="Left" />
-					<TextBox x:Name="nom_new" Grid.Row="1" />
-					<Button x:Name="button_new" Grid.Row="2" Content="Valider" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
-				</Grid>
-				<TextBlock x:Name="Statut"/>
-			</StackPanel>
-			<ListBox HorizontalAlignment="Left" Height="300" ItemTemplate="{StaticResource ItemTemplate}" ItemsSource="{Binding Collection}" Margin="193,71,0,0" VerticalAlignment="Top" Width="200"/>
-            <Grid x:Name="LayoutRootBis" Background="Transparent">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="100"/>
-                </Grid.RowDefinitions>
-                <ListBox ItemsSource="{Binding listeDesLieux}" >
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
+            <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="GeoSong" Margin="9,-7,0,0" HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}"/>
+                <ListBox x:Name="listeDesLieux" Grid.Row="1" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Titre}" Margin="20 0 0 0" />
-                                <TextBlock Text="{Binding Url}" Margin="20 0 0 0" />
+                                <CheckBox x:Name="EnCours" />
+                                <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" />
                             </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <!-- http://fr.openclassrooms.com/informatique/cours/creez-des-applications-pour-windows-phone/acceder-aux-donnees-2 -->
-                <Button Content="Ajouter un élément" Click="Button_Click" Grid.Row="1" />
-            </Grid>
+                            <StackPanel Orientation="Vertical">
+                                <Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" />
+                                <Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
+                                <Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
+                            </StackPanel>
+                            <Button x:Name="button_delete" Content="x" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+                        <TextBlock x:Name="Selection" Grid.Row="0" Text="selection" />
+                        <TextBlock x:Name="Statut" Grid.Row="3" Text="statut" />
+                        <TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
+                        <TextBlock x:Name="Longitude" Grid.Row="2" Text="longitude"  />
+                        <Button x:Name="button_add" Grid.Row="0"  Content="+" Click="Button_Add" HorizontalAlignment="Left" />
+                        <TextBox x:Name="nom_new" Grid.Row="1" />
+                    <Button x:Name="button_new" Grid.Row="2" Content="Ajouter" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
+                <ListBox HorizontalAlignment="Left" Height="300" ItemTemplate="{StaticResource ItemTemplate}" ItemsSource="{Binding Collection}" Margin="193,71,0,0" VerticalAlignment="Top" Width="200"/>
+                <ListBox ItemsSource="{Binding Source={StaticResource LieuxListBox}}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Lieu}" Margin="20 0 0 0" />
+                                    <TextBlock Text="{Binding Url}" Margin="20 0 0 0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+            </StackPanel>
         </Grid>
-
-	</Grid>
+    </ScrollViewer>
 
 </phone:PhoneApplicationPage>

@@ -1,14 +1,6 @@
 ﻿<SampleData:DesignListBox xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.DesignListBox">
 	<SampleData:DesignListBox.Collection>
-		<SampleData:Item Lieu="Nam aenean aliquam" Url="http://polytech.unice.fr"/>
-		<SampleData:Item Lieu="Sed adipiscing curabitur" Url="Integer mauris"/>
-		<SampleData:Item Lieu="Parturient quisque phasellus consequat" Url="Praesent curae vivamus duis"/>
-		<SampleData:Item Lieu="Vestibulum accumsan vestibulum donec dis" Url="Convallis aliquam aliquet est"/>
-		<SampleData:Item Lieu="Blandit nunc etiam hac" Url="Adipiscing bibendum dignissim nullam"/>
-		<SampleData:Item Lieu="Elementum commodo fusce" Url="Conubia facilisis"/>
-		<SampleData:Item Lieu="Fermentum fringilla parturient amet cubilia" Url="Leo lorem"/>
-		<SampleData:Item Lieu="Dapibus vestibulum dictumst mus" Url="Vestibulum ante morbi aptent nulla"/>
-		<SampleData:Item Lieu="Egestas arcu eleifend" Url="Facilisi nec proin"/>
-		<SampleData:Item Lieu="Faucibus augue auctor non" Url="Adipiscing parturient"/>
+		<SampleData:Item Lieu="Polytech" Url="http://polytech.unice.fr"/>
+		<SampleData:Item Lieu="Maison" Url="http://facebook.com"/>
 	</SampleData:DesignListBox.Collection>
 </SampleData:DesignListBox>

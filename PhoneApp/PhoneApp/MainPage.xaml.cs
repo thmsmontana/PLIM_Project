@@ -13,6 +13,7 @@ using Microsoft.Phone.Shell;
 using PhoneApp.Resources;
 using Windows.Devices.Geolocation;
 using Microsoft.Phone.Tasks;
+using Expression.Blend.SampleData.LieuxListBox;
 
 namespace PhoneApp
 {
@@ -20,6 +21,8 @@ namespace PhoneApp
     public partial class MainPage : PhoneApplicationPage
     {
         public List<ElementAFaireBinding> Lieu;
+        public LieuxListBox listeLieux;
+        public DesignListBox ok;
 
         private Geolocator geolocator;
         // Constructeur
@@ -29,11 +32,10 @@ namespace PhoneApp
             //Lieu.Add("Default");
             Lieu = new List<ElementAFaireBinding>{
                 new ElementAFaireBinding {Titre = "Default", Url = "http://google.com"},
-                /*
                 new ElementAFaireBinding {Titre = "Deuxième", Url = "http://google.fr"},
-                new ElementAFaireBinding {Titre = "Troisième", Url = "http://google.fr"},*/
             };
-            listeDesLieux.ItemsSource = Lieu; 
+            listeDesLieux.ItemsSource = Lieu;
+            listeLieux = new LieuxListBox();
 
             // Exemple de code pour la localisation d'ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -69,11 +71,12 @@ namespace PhoneApp
             Lieu.Add(element);
             listeDesLieux.ItemsSource = Lieu; 
 
+
             nom_new.Text = "";
             nom_new.Visibility = Visibility.Collapsed;
             button_new.Visibility = Visibility.Collapsed;
         }
-
+        
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             geolocator = new Geolocator { DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 20 };
@@ -127,45 +130,21 @@ namespace PhoneApp
                 Longitude.Text = args.Position.Coordinate.Longitude.ToString();
             });
         } 
-       
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
-        { /*
-            Geolocator geolocator = new Geolocator();
-            geolocator.DesiredAccuracyInMeters = 50;
-
-            try
-            {
-                Geoposition geoposition = await geolocator.GetGeopositionAsync(TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(10));
-
-                Dispatcher.BeginInvoke(() =>
-                {
-                    Latitude.Text = geoposition.Coordinate.Latitude.ToString();
-                    Longitude.Text = geoposition.Coordinate.Longitude.ToString();
-                });
-            }
-            catch (UnauthorizedAccessException)
-            {
-                MessageBox.Show("Le service de location est désactivé dans les paramètres du téléphone");
-            }
-            catch (Exception ex)
-            {
-            }*/
-        }
 
         private void button_url_Click(object sender, RoutedEventArgs e)
         {
-
+            /*
             string selection = string.Empty;
             foreach (string choix in listeDesLieux.SelectedItems)
             {
                 selection += choix + ";";
             }
-            Selection.Text = selection;
+            Selection.Text = selection;*/
             //ElementAFaireBinding element = (string)listeDesLieux.SelectedItem;
 
-                //WebBrowserTask webBrowserTask = new WebBrowserTask();
-                //webBrowserTask.Uri = new Uri("", UriKind.Absolute);
-                //webBrowserTask.Show();
+                WebBrowserTask webBrowserTask = new WebBrowserTask();
+                webBrowserTask.Uri = new Uri("http://google.com", UriKind.Absolute);
+                webBrowserTask.Show();
 
         }
 
@@ -174,11 +153,6 @@ namespace PhoneApp
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
 
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         /*
