@@ -148,13 +148,25 @@ namespace PhoneApp
             //MessageBox.Show(Url);
         }
 
+        /**
+         * Supprime l'item sélectionné
+         */
         private void button_delete_Click(object sender, RoutedEventArgs e)
         {
-            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
-            /*
-            nouvelleListe.Add(new ElementAFaireBinding { Titre = nom_new.Text, Url = "http://google.co" });
-            Lieu = nouvelleListe;
-            listeDesLieux.ItemsSource = Lieu;*/
+            int i = listeDesLieux.SelectedIndex;
+            int count = Lieu.Count;
+            // Vérification si item sélectionner
+            if (i != -1)
+            {
+                //MessageBox.Show(Convert.ToString(Selected.Content));
+                List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
+                List<ElementAFaireBinding> temp = nouvelleListe.GetRange(0, i); //.Except(deleteElement);
+                List<ElementAFaireBinding> temp2 = nouvelleListe.GetRange(i+1, count-i-1);
+                nouvelleListe = temp;
+                nouvelleListe.AddRange(temp2);
+                Lieu = nouvelleListe;
+                listeDesLieux.ItemsSource = Lieu;
+            }
         }
         /*
          * private void button8_Click(object sender, System.EventArgs e)

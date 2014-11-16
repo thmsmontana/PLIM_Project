@@ -37,18 +37,16 @@
                 <ListBox x:Name="listeDesLieux" Grid.Row="1" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox x:Name="EnCours" />
-                                    <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" FontSize="12" Padding="0 30 0 0" FontWeight="Bold"/>
-                                    <Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" FontSize="12" />
-
-                                    <Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" FontSize="12" />
-                                    <Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
-                                    <Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
-                                    <Button Click="button_delete_Click" x:Name="button_delete" Content="x" />
-                                </StackPanel>
-                        </StackPanel>
+                                <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" FontSize="12" Padding="0 30 0 0" FontWeight="Bold"/>
+                                <Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" FontSize="12" />
+                                
+                                <Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" FontSize="12" />
+                                <Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
+                                <Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
+                                <Button Click="button_delete_Click" x:Name="button_delete" Content="x" />
+                            </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -62,6 +60,8 @@
                 <TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
                 <TextBlock x:Name="Longitude" Grid.Row="2" Text="longitude"  />
 
+                <TextBlock x:Name="Temp" Grid.Row="3" Text="temp" />
+                
                 <ListBox HorizontalAlignment="Left" Height="300" ItemTemplate="{StaticResource ItemTemplate}" ItemsSource="{Binding Collection}" Margin="193,71,0,0" VerticalAlignment="Top" Width="200"/>
                 
             </StackPanel>
