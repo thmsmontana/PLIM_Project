@@ -14,6 +14,7 @@ using PhoneApp.Resources;
 using Windows.Devices.Geolocation;
 using Microsoft.Phone.Tasks;
 using Expression.Blend.SampleData.LieuxListBox;
+using System.Runtime.CompilerServices;
 
 namespace PhoneApp
 {
@@ -21,10 +22,9 @@ namespace PhoneApp
     public partial class MainPage : PhoneApplicationPage
     {
         public List<ElementAFaireBinding> Lieu;
-        public LieuxListBox listeLieux;
-        public DesignListBox ok;
-
+        
         private Geolocator geolocator;
+
         // Constructeur
         public MainPage()
         {
@@ -35,42 +35,30 @@ namespace PhoneApp
                 new ElementAFaireBinding {Titre = "Deuxième", Url = "http://google.fr"},
             };
             listeDesLieux.ItemsSource = Lieu;
-            listeLieux = new LieuxListBox();
 
-            // Exemple de code pour la localisation d'ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
-
-        // Exemple de code pour la conception d'une ApplicationBar localisée
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
-
-        //    // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Crée un nouvel élément de menu avec la chaîne localisée d'AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
 
         private void Button_Add(object sender, RoutedEventArgs e)
         {
-            nom_new.Visibility = Visibility.Visible;
-            button_new.Visibility = Visibility.Visible;
+            if (nom_new.Visibility == (Visibility.Collapsed))
+            {
+                nom_new.Visibility = Visibility.Visible;
+                button_new.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                nom_new.Text = "";
+                nom_new.Visibility = Visibility.Collapsed;
+                button_new.Visibility = Visibility.Collapsed;
+
+            }
         }
         private void Button_New(object sender, RoutedEventArgs e)
         {
-            //SaveRingtoneTask ringtoneTask = new SaveRingtoneTask();
-
-            ElementAFaireBinding element = new ElementAFaireBinding { Titre = nom_new.Text, Url = "vibreur" };
-            //String nom = nom_new.Text;
-            Lieu.Add(element);
-            listeDesLieux.ItemsSource = Lieu; 
-
+            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
+            nouvelleListe.Add(new ElementAFaireBinding { Titre = nom_new.Text, Url = "http://google.co" });
+            Lieu = nouvelleListe;
+            listeDesLieux.ItemsSource = Lieu;
 
             nom_new.Text = "";
             nom_new.Visibility = Visibility.Collapsed;
@@ -150,11 +138,24 @@ namespace PhoneApp
 
         private void button_modifier_Click(object sender, RoutedEventArgs e)
         {
+           
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
 
             //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
         }
+        private void button_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            //MessageBox.Show(Url);
+        }
 
+        private void button_delete_Click(object sender, RoutedEventArgs e)
+        {
+            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
+            /*
+            nouvelleListe.Add(new ElementAFaireBinding { Titre = nom_new.Text, Url = "http://google.co" });
+            Lieu = nouvelleListe;
+            listeDesLieux.ItemsSource = Lieu;*/
+        }
         /*
          * private void button8_Click(object sender, System.EventArgs e)
 

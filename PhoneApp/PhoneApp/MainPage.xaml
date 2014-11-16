@@ -40,39 +40,30 @@
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <CheckBox x:Name="EnCours" />
-                                <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" />
-                                <Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" />
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical">
-                                <Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
-                                <Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
-                            </StackPanel>
-                            <Button x:Name="button_delete" Content="x" />
+                                    <TextBlock x:Name="nom_lieu" Text="{Binding Titre}" FontSize="12" Padding="0 30 0 0" FontWeight="Bold"/>
+                                    <Button Click="button_url_Click"  x:Name="button_url" Content="{Binding Url}" FontSize="12" />
+
+                                    <Button Click="button_modifier_Click" x:Name="button_modifier" Content="Modifier" FontSize="12" />
+                                    <Button x:Name="button_add_point" Content="Ajouter dans la zone" Visibility="Collapsed" />
+                                    <Button x:Name="button_delete_point" Content="En dehors de la zone" Visibility="Collapsed" />
+                                    <Button Click="button_delete_Click" x:Name="button_delete" Content="x" />
+                                </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-                        <TextBlock x:Name="Selection" Grid.Row="0" Text="selection" />
-                        <TextBlock x:Name="Statut" Grid.Row="3" Text="statut" />
-                        <TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
-                        <TextBlock x:Name="Longitude" Grid.Row="2" Text="longitude"  />
-                        <Button x:Name="button_add" Grid.Row="0"  Content="+" Click="Button_Add" HorizontalAlignment="Left" />
-                        <TextBox x:Name="nom_new" Grid.Row="1" />
-                    <Button x:Name="button_new" Grid.Row="2" Content="Ajouter" Click="Button_New" FontSize="14" HorizontalAlignment="Right" />
+                <Button x:Name="button_add" Grid.Row="0"  Content="+" Click="Button_Add" HorizontalAlignment="Left" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="nom_new" Grid.Row="1" Width="300" Visibility="Collapsed" />
+                    <Button x:Name="button_new" Grid.Row="2" Content="Enregistrer" Click="Button_New" FontSize="12" HorizontalAlignment="Right" Visibility="Collapsed" />
+                </StackPanel>
+
+                <TextBlock x:Name="Statut" Grid.Row="3" Text="statut" />
+                <TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
+                <TextBlock x:Name="Longitude" Grid.Row="2" Text="longitude"  />
+
                 <ListBox HorizontalAlignment="Left" Height="300" ItemTemplate="{StaticResource ItemTemplate}" ItemsSource="{Binding Collection}" Margin="193,71,0,0" VerticalAlignment="Top" Width="200"/>
-                <ListBox ItemsSource="{Binding Source={StaticResource LieuxListBox}}" >
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Lieu}" Margin="20 0 0 0" />
-                                    <TextBlock Text="{Binding Url}" Margin="20 0 0 0" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                
             </StackPanel>
         </Grid>
     </ScrollViewer>
