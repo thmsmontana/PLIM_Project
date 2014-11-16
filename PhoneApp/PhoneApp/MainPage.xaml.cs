@@ -29,40 +29,12 @@ namespace PhoneApp
         public MainPage()
         {
             InitializeComponent();
-            //Lieu.Add("Default");
             Lieu = new List<ElementAFaireBinding>{
-                new ElementAFaireBinding {Titre = "Default", Url = "http://google.com"},
-                new ElementAFaireBinding {Titre = "Deuxième", Url = "http://google.fr"},
+                new ElementAFaireBinding {Titre = "Polytech", Url = "http://google.com"},
+                new ElementAFaireBinding {Titre = "Maison", Url = "http://facebook.com"},
             };
             listeDesLieux.ItemsSource = Lieu;
 
-        }
-
-        private void Button_Add(object sender, RoutedEventArgs e)
-        {
-            if (nom_new.Visibility == (Visibility.Collapsed))
-            {
-                nom_new.Visibility = Visibility.Visible;
-                button_new.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                nom_new.Text = "";
-                nom_new.Visibility = Visibility.Collapsed;
-                button_new.Visibility = Visibility.Collapsed;
-
-            }
-        }
-        private void Button_New(object sender, RoutedEventArgs e)
-        {
-            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
-            nouvelleListe.Add(new ElementAFaireBinding { Titre = nom_new.Text, Url = "http://google.co" });
-            Lieu = nouvelleListe;
-            listeDesLieux.ItemsSource = Lieu;
-
-            nom_new.Text = "";
-            nom_new.Visibility = Visibility.Collapsed;
-            button_new.Visibility = Visibility.Collapsed;
         }
         
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -117,35 +89,83 @@ namespace PhoneApp
                 Latitude.Text = args.Position.Coordinate.Latitude.ToString();
                 Longitude.Text = args.Position.Coordinate.Longitude.ToString();
             });
-        } 
+        }
+        /*
+         * Affiche ou Cache les champs pour ajouter un nouveau lieu et url
+         */
+        private void Button_Add(object sender, RoutedEventArgs e)
+        {
+            if (nom_new_lieu.Visibility == (Visibility.Collapsed))
+            {
+                nom_lieu.Visibility = Visibility.Visible;
+                nom_new_lieu.Visibility = Visibility.Visible;
+                nom_url.Visibility = Visibility.Visible;
+                nom_new_url.Visibility = Visibility.Visible;
+                button_new.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                nom_new_lieu.Text = "";
+                nom_new_url.Text = "";
+                nom_lieu.Visibility = Visibility.Collapsed;
+                nom_new_lieu.Visibility = Visibility.Collapsed;
+                nom_url.Visibility = Visibility.Collapsed;
+                nom_new_url.Visibility = Visibility.Collapsed;
+                button_new.Visibility = Visibility.Collapsed;
 
+            }
+        }
+        /**
+         * Enregistre un nouveau lieu et Url
+         */
+        private void Button_New(object sender, RoutedEventArgs e)
+        {
+            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
+            // On suppose que l'url est valide
+            nouvelleListe.Add(new ElementAFaireBinding { Titre = nom_new_lieu.Text, Url = nom_new_url.Text });
+            Lieu = nouvelleListe;
+            listeDesLieux.ItemsSource = Lieu;
+
+            nom_new_lieu.Text = "";
+            nom_new_url.Text = "";
+            nom_lieu.Visibility = Visibility.Collapsed;
+            nom_new_lieu.Visibility = Visibility.Collapsed;
+            nom_url.Visibility = Visibility.Collapsed;
+            nom_new_url.Visibility = Visibility.Collapsed;
+            button_new.Visibility = Visibility.Collapsed;
+        }
+        /**
+         * Lance l'url sur le navigateur
+         */
         private void button_url_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            string selection = string.Empty;
-            foreach (string choix in listeDesLieux.SelectedItems)
+            int i = listeDesLieux.SelectedIndex;
+            // Vérification si item sélectionner
+            if (i != -1)
             {
-                selection += choix + ";";
-            }
-            Selection.Text = selection;*/
-            //ElementAFaireBinding element = (string)listeDesLieux.SelectedItem;
+                String url = Lieu[i].Url;
 
                 WebBrowserTask webBrowserTask = new WebBrowserTask();
-                webBrowserTask.Uri = new Uri("http://google.com", UriKind.Absolute);
+                webBrowserTask.Uri = new Uri(url, UriKind.Absolute);
                 webBrowserTask.Show();
-
+            }
         }
 
         private void button_modifier_Click(object sender, RoutedEventArgs e)
         {
-           
-            //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
-
-            //listeDesLieux.button_add_point.Visibility = Visibility.Visible;
-        }
-        private void button_Tap_1(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            //MessageBox.Show(Url);
+            int i = listeDesLieux.SelectedIndex;
+            // Vérification si item sélectionner
+            if (i != -1)
+            {
+                nom_new_lieu.Text = Lieu[i].Titre;
+                nom_new_url.Text = Lieu[i].Url;
+                nom_lieu.Visibility = Visibility.Visible;
+                nom_new_lieu.Visibility = Visibility.Visible;
+                nom_url.Visibility = Visibility.Visible;
+                nom_new_url.Visibility = Visibility.Visible;
+                button_new.Visibility = Visibility.Visible;
+                deleteElement(i, Lieu.Count);
+            }
         }
 
         /**
@@ -154,30 +174,24 @@ namespace PhoneApp
         private void button_delete_Click(object sender, RoutedEventArgs e)
         {
             int i = listeDesLieux.SelectedIndex;
-            int count = Lieu.Count;
             // Vérification si item sélectionner
             if (i != -1)
             {
-                //MessageBox.Show(Convert.ToString(Selected.Content));
-                List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
-                List<ElementAFaireBinding> temp = nouvelleListe.GetRange(0, i); //.Except(deleteElement);
-                List<ElementAFaireBinding> temp2 = nouvelleListe.GetRange(i+1, count-i-1);
-                nouvelleListe = temp;
-                nouvelleListe.AddRange(temp2);
-                Lieu = nouvelleListe;
-                listeDesLieux.ItemsSource = Lieu;
+                deleteElement(i, Lieu.Count);
             }
         }
-        /*
-         * private void button8_Click(object sender, System.EventArgs e)
-
-{
-
-string url = "http://www.google.com";
-
-System.Diagnostics.Process.Start(url);
-
-}
-    */
+        /**
+         * Supprime un élément de la liste
+         */
+        private void deleteElement(int i, int count)
+        {
+            List<ElementAFaireBinding> nouvelleListe = new List<ElementAFaireBinding>(Lieu);
+            List<ElementAFaireBinding> temp = nouvelleListe.GetRange(0, i);
+            List<ElementAFaireBinding> temp2 = nouvelleListe.GetRange(i + 1, count - i - 1);
+            nouvelleListe = temp;
+            nouvelleListe.AddRange(temp2);
+            Lieu = nouvelleListe;
+            listeDesLieux.ItemsSource = Lieu;
+        }
     }
 }

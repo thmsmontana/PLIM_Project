@@ -52,9 +52,14 @@
             </ListBox>
                 <Button x:Name="button_add" Grid.Row="0"  Content="+" Click="Button_Add" HorizontalAlignment="Left" />
                 <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="nom_new" Grid.Row="1" Width="300" Visibility="Collapsed" />
-                    <Button x:Name="button_new" Grid.Row="2" Content="Enregistrer" Click="Button_New" FontSize="12" HorizontalAlignment="Right" Visibility="Collapsed" />
+                    <TextBlock x:Name="nom_lieu" Text="Lieu"  Visibility="Collapsed" />
+                    <TextBox x:Name="nom_new_lieu" Grid.Row="1" Width="300" Visibility="Collapsed" />
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="nom_url" Text="Url"  Visibility="Collapsed" />
+                    <TextBox x:Name="nom_new_url" Grid.Row="1" Width="300" Visibility="Collapsed" />
+                </StackPanel>
+                <Button x:Name="button_new" Grid.Row="2" Content="Enregistrer" Click="Button_New" FontSize="12" HorizontalAlignment="Right" Visibility="Collapsed" />
 
                 <TextBlock x:Name="Statut" Grid.Row="3" Text="statut" />
                 <TextBlock x:Name="Latitude" Grid.Row="1" Text="latitude" />
